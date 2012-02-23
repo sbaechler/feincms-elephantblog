@@ -66,7 +66,7 @@ class Category(models.Model, TranslatedObjectMixin):
         except FieldError: #Translation Extention not active
             return Entry.objects.filter(categories=self)
     entries.short_description = _('Blog entries in category')
-        
+           
 
     '''
     returns the url of a blog category depending on whether
@@ -148,7 +148,10 @@ class EntryManager(models.Manager):
     # Extended for example in the datepublisher extension (date-based publishing and
     # un-publishing of pages)
     CLEARED = 50
+    HIDDEN = 45
     active_filters = {'cleared' : Q(published__gte=CLEARED),
+        'publish_start': Q(published_on__lte=datetime.now),}
+    visible_filters = {'cleared' : Q(published__gt=HIDDEN),
         'publish_start': Q(published_on__lte=datetime.now),}
 
 
@@ -166,7 +169,9 @@ class EntryManager(models.Manager):
 
     def active(self):
         return self.apply_active_filters(self, filter=self.active_filters)
-
+    
+    def visible(self):
+        return self.apply_active_filters(self, filter=self.active_filters)
 
     def featured(self):
         return self.active().filter(published=self.model.FRONT_PAGE)
@@ -179,6 +184,7 @@ class Entry(Base):
     DELETED = 10
     INACTIVE = 30
     NEEDS_REEDITING = 40
+    HIDDEN = 45
     CLEARED = 50
     FRONT_PAGE = 60
 
@@ -186,6 +192,7 @@ class Entry(Base):
         (INACTIVE,_('inactive')),
         (CLEARED,_('cleared')),
         (FRONT_PAGE,_('front page')),
+        (HIDDEN,_('hidden')),
         (NEEDS_REEDITING,_('needs re-editing')),
         (DELETED,_('deleted')),
         )
@@ -285,13 +292,20 @@ class Entry(Base):
                 return False
         except Exception:
             pass
-        if self.published_on > datetime.now() or self.published < self.CLEARED:
+        if self.published_on > datetime.now() or self.published < self.HIDDEN:
             return False
         else:
             return True
     isactive.short_description = _('active')
     isactive.boolean = True
     is_active = property(isactive)
+    
+    @property
+    def is_visible(self):
+        if self.isactive() and self.published > self.HIDDEN:
+            return True
+        return False
+    
 
     @property
     def featured(self):  #fits page extension featured

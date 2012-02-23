@@ -4,8 +4,8 @@ from django import forms
 from django.db import models
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext_lazy as _
-from elephantblog.models import Category
+from django.utils.translation import ugettext_lazy as _, get_language
+from elephantblog.models import Entry, Category
 
 class BlogGalleryTeaserWidget(models.Model):
     category = models.ForeignKey(Category)
@@ -29,7 +29,8 @@ class BlogGalleryTeaserWidget(models.Model):
     
     def render(self, **kwargs):
         request = kwargs.get('request')
-        entries = self.category.blogposts.select_related('gallerycontent', 'richtextcontent')
+        entries = Entry.objects.visible().select_related('gallerycontent', 'richtextcontent')\
+                    .filter(categories=self.category, language=get_language() )
         for entry in entries:
             if entry.is_active:
                 try:
