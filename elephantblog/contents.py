@@ -5,7 +5,8 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
 from elephantblog.models import Category, Entry
-from elephantblog.utils import entry_list_lookup_related
+from elephantblog.utils import entry_list_lookup_related, get_usage,\
+    calculate_cloud
 
 try:
     # Load paginator with additional goodies form towel if possible
@@ -54,3 +55,26 @@ class BlogEntryListContent(models.Model):
         if self.featured_only:
             template_names.insert(0, 'entry_list_featured.html')
         return render_to_string(template_names, { 'content': self })
+
+        
+class TagCloudContent(models.Model):
+    steps = models.IntegerField(_('number of steps'), default=7,
+                                help_text=_('number of steps.'))
+    computingtype = models.CharField(_('computingtype'), max_length=16, 
+                                     choices=(
+        ('LINEAR', _('linear')),
+        ('LOGARITHMIC', _('logarithmic')),
+    ))
+    
+    class Meta:
+        abstract = True
+        verbose_name = _('tag cloud content')
+        verbose_name_plural = _('tag cloud contents')
+
+    def render(self, **kwargs):
+        categories = get_usage(Category, counts=True)
+        cloud = calculate_cloud(categories, self.steps, self.computingtype)
+        return render_to_string([
+            'content/elephantblog/tagcloud.html',
+            ], {'content': self, 'cloud' : cloud})
+    
