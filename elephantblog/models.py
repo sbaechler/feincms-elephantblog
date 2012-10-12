@@ -138,6 +138,7 @@ class Entry(Base):
     def register_extension(cls, register_fn):
         register_fn(cls, EntryAdmin)
 
+
 signals.post_syncdb.connect(check_database_schema(Entry, __name__), weak=False)
 
 
