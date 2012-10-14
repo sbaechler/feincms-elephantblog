@@ -1,6 +1,7 @@
 import datetime
 
 from django.conf import settings
+from django.db.models import FieldDoesNotExist
 from django.http import Http404, HttpResponse
 from django.db import models
 from django.shortcuts import get_object_or_404
@@ -59,7 +60,18 @@ class ElephantblogMixin(object):
             context, **response_kwargs)
 
 
-class ArchiveIndexView(ElephantblogMixin, dates.ArchiveIndexView):
+class TranslationMixin(object):
+    def get_queryset(self):
+        queryset = super(TranslationMixin, self).get_queryset()
+        try:
+            queryset.model._meta.get_field_by_name('language')
+        except FieldDoesNotExist:
+            return queryset
+        else:
+            return queryset.filter(language=short_language_code)
+
+
+class ArchiveIndexView(TranslationMixin, ElephantblogMixin, dates.ArchiveIndexView):
     paginator_class = paginator.Paginator
     paginate_by = PAGINATE_BY
     date_field = 'published_on'
@@ -67,7 +79,7 @@ class ArchiveIndexView(ElephantblogMixin, dates.ArchiveIndexView):
     allow_empty = True
 
 
-class YearArchiveView(ElephantblogMixin, dates.YearArchiveView):
+class YearArchiveView(TranslationMixin, ElephantblogMixin, dates.YearArchiveView):
     paginator_class = paginator.Paginator
     paginate_by = PAGINATE_BY
     date_field = 'published_on'
@@ -75,7 +87,7 @@ class YearArchiveView(ElephantblogMixin, dates.YearArchiveView):
     template_name_suffix = '_archive'
 
 
-class MonthArchiveView(ElephantblogMixin, dates.MonthArchiveView):
+class MonthArchiveView(TranslationMixin, ElephantblogMixin, dates.MonthArchiveView):
     paginator_class = paginator.Paginator
     paginate_by = PAGINATE_BY
     month_format = '%m'
@@ -83,7 +95,7 @@ class MonthArchiveView(ElephantblogMixin, dates.MonthArchiveView):
     template_name_suffix = '_archive'
 
 
-class DayArchiveView(ElephantblogMixin, dates.DayArchiveView):
+class DayArchiveView(TranslationMixin, ElephantblogMixin, dates.DayArchiveView):
     paginator_class = paginator.Paginator
     paginate_by = PAGINATE_BY
     month_format = '%m'
