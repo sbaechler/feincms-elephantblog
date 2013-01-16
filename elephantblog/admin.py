@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from elephantblog.models import Entry, EntryAdmin, Category, CategoryTranslation
 
-from feincms.translations import admin_translationinline, short_language_code
+from feincms.translations import admin_translationinline
 
 
 CategoryTranslationInline = admin_translationinline(CategoryTranslation, prepopulated_fields={
