@@ -22,7 +22,7 @@ class GenericViewsTest(TestCase):
         response = c.get('/blog/')
         self.assertTrue(isinstance(response.context['view'],
             blogviews.ArchiveIndexView ))
-        self.assertEqual(len(response.context['object_list']), 2)
+        self.assertEqual(len(response.context['object_list']), 4)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, u'Entry 1')
         self.assertContains(response, u'Eintrag 1')
@@ -31,13 +31,13 @@ class GenericViewsTest(TestCase):
         response = c.get('/blog/2012/')
         self.assertTrue(isinstance(response.context['view'],
                                         blogviews.YearArchiveView ))
-        self.assertEqual(len(response.context['object_list']), 2)
+        self.assertEqual(len(response.context['object_list']), 3)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, u'News for 2012')
         self.assertContains(response, u'Entry 1')
         self.assertContains(response, u'Eintrag 1')
-        # No entries in 2011:
-        response = c.get('/blog/2011/')
+        # No entries in 2010:
+        response = c.get('/blog/2010/')
         self.assertEqual(response.status_code, 404)
 
         # Test month archive

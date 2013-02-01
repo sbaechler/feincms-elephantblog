@@ -33,7 +33,7 @@ class NoTranslationsTest(TestCase):
         c = Client()
         # Test Archive URL
         response = c.get('/blog/')
-        self.assertEqual(len(response.context['object_list']), 2)
+        self.assertEqual(len(response.context['object_list']), 4)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, u'Entry 1')
         self.assertContains(response, u'Eintrag 1')
@@ -73,6 +73,18 @@ class TranslationsTest(TestCase):
         entry2.language = 'de'
         entry2.translation_of = entry1
         entry2.save()
+        entry3 = entries[2]
+        self.assertEqual(entry3.pk, 3)
+        self.assertEqual(entry3.title, u'Entry chinese simplified')
+        entry3.language = 'zh-cn'
+        entry3.translation_of = entry1
+        entry3.save()
+        entry4 = entries[3]
+        self.assertEqual(entry4.pk, 4)
+        self.assertEqual(entry4.title, u'Entry chinese tratitional')
+        entry4.language = 'zh-tw'
+        entry4.translation_of = entry1
+        entry4.save()
 
         entry = Entry.objects.get(language='de')
         self.assertEqual(entry.title, u'Eintrag 1')
@@ -94,3 +106,22 @@ class TranslationsTest(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertContains(response, u'Entry 1')
             self.assertNotContains(response, u'Eintrag 1')
+
+        with translation.override('zh-cn'):
+            response = c.get('/blog/', HTTP_ACCEPT_LANGUAGE='zh-cn')
+            import ipdb; ipdb.set_trace()
+            self.assertEqual(short_language_code(), 'zh')
+            self.assertEqual(translation.get_language(), 'zh-cn')
+            self.assertEqual(len(response.context['object_list']), 1)
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, u'Entry 1')
+            self.assertNotContains(response, u'Entry chinese simplified')
+
+        with translation.override('zh-tw'):
+            response = c.get('/blog/', HTTP_ACCEPT_LANGUAGE='zh-TW')
+            self.assertEqual(short_language_code(), 'zh')
+            self.assertEqual(translation.get_language(), 'zh-tw')
+            self.assertEqual(len(response.context['object_list']), 1)
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, u'Entry 1')
+            self.assertNotContains(response, u'Entry chinese tratitional')

@@ -3,3 +3,4 @@
 ipython
 pytz
 factory_boy>=1.2
+python-gettext

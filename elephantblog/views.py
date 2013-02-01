@@ -68,7 +68,7 @@ class TranslationMixin(object):
         except FieldDoesNotExist:
             return queryset
         else:
-            return queryset.filter(language=short_language_code)
+            return queryset.filter(language__istartswith=short_language_code())
 
 
 class ArchiveIndexView(TranslationMixin, ElephantblogMixin, dates.ArchiveIndexView):

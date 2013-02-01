@@ -1,0 +1,211 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-28 04:52-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin.py:20
+msgid "Blog entries in category"
+msgstr ""
+
+#: contents.py:19 models.py:32
+msgid "category"
+msgstr ""
+
+#: contents.py:19
+msgid "Only show entries from this category."
+msgstr ""
+
+#: contents.py:20
+msgid "entries per page"
+msgstr ""
+
+#: contents.py:21
+msgid "Set to 0 to disable pagination."
+msgstr ""
+
+#: contents.py:22
+msgid "featured only"
+msgstr ""
+
+#: contents.py:23
+msgid "Only show articles marked as featured"
+msgstr ""
+
+#: contents.py:27
+msgid "Blog entry list"
+msgstr ""
+
+#: contents.py:28
+msgid "Blog entry lists"
+msgstr ""
+
+#: models.py:29
+msgid "ordering"
+msgstr ""
+
+#: models.py:33 models.py:99
+msgid "categories"
+msgstr ""
+
+#: models.py:40
+msgid "Unnamed category"
+msgstr ""
+
+#: models.py:44
+msgid "category title"
+msgstr ""
+
+#: models.py:45 models.py:92
+msgid "slug"
+msgstr ""
+
+#: models.py:46
+msgid "description"
+msgstr ""
+
+#: models.py:49
+msgid "category translation"
+msgstr ""
+
+#: models.py:50
+msgid "category translations"
+msgstr ""
+
+#: models.py:88
+msgid "is active"
+msgstr ""
+
+#: models.py:89
+msgid "is featured"
+msgstr ""
+
+#: models.py:91
+msgid "title"
+msgstr ""
+
+#: models.py:94
+msgid "author"
+msgstr ""
+
+#: models.py:95
+msgid "published on"
+msgstr ""
+
+#: models.py:96
+msgid "Will be filled in automatically when entry gets published."
+msgstr ""
+
+#: models.py:97
+msgid "last change"
+msgstr ""
+
+#: models.py:105
+msgid "entry"
+msgstr ""
+
+#: models.py:106
+msgid "entries"
+msgstr ""
+
+#: models.py:151
+#, python-format
+msgid "One entry was successfully marked as %(state)s"
+msgid_plural "%(count)s entries were successfully marked as %(state)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views.py:178
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+
+#: extensions/blogping.py:20
+msgid "sleeping"
+msgstr ""
+
+#: extensions/blogping.py:21 extensions/blogping.py:33
+msgid "queued"
+msgstr ""
+
+#: extensions/blogping.py:22
+msgid "sent"
+msgstr ""
+
+#: extensions/blogping.py:23
+msgid "unknown"
+msgstr ""
+
+#: extensions/blogping.py:26
+msgid "ping"
+msgstr ""
+
+#: extensions/blogping.py:34
+msgid "Ping Again"
+msgstr ""
+
+#: extensions/sites.py:11
+msgid "The sites where the blogpost should appear."
+msgstr ""
+
+#: extensions/sites.py:23
+msgid "Sites"
+msgstr ""
+
+#: extensions/tags.py:8
+msgid "A comma-separated list of tags."
+msgstr ""
+
+#: navigation_extensions/common.py:38
+msgid "blog categories"
+msgstr ""
+
+#: navigation_extensions/recursetree.py:11
+#: navigation_extensions/treeinfo.py:16
+msgid "Blog date"
+msgstr ""
+
+#: navigation_extensions/recursetree.py:39
+#: navigation_extensions/treeinfo.py:42
+msgid "Blog category and date"
+msgstr ""
+
+#: navigation_extensions/recursetree.py:56
+#: navigation_extensions/treeinfo.py:47
+msgid "Categories"
+msgstr ""
+
+#: navigation_extensions/recursetree.py:89
+#: navigation_extensions/treeinfo.py:66
+msgid "Archive"
+msgstr ""
+
+#: templates/admin/feincms/elephantblog/entry/item_editor.html:13
+msgid "Preview"
+msgstr ""
+
+#: templates/content/elephantblog/entry_list.html:13
+#: templates/elephantblog/entry_archive.html:28
+#: templates/elephantblog/entry_detail.html:18
+msgid "by"
+msgstr ""
+
+#: templates/elephantblog/entry_archive.html:5
+#: templates/elephantblog/entry_detail.html:5
+msgid "News"
+msgstr ""

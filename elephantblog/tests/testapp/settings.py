@@ -35,4 +35,6 @@ BLOG_TITLE = u'Blog of the usual elephant'
 BLOG_DESCRIPTION = ''
 TIME_ZONE = 'America/Chicago'
 USE_TZ = False
-LANGUAGES = (('en', 'English'), ('de', 'German'),)
+LANGUAGES = (('en', 'English'), ('de', 'German'),
+        ('zh-cn', 'Chinese simplified'), ('zh-tw', 'Chinese tratitional')
+    )

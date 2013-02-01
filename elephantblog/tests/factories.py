@@ -36,6 +36,22 @@ def create_entries(factory):
         last_changed=datetime.datetime(2012,10,12, 15,0,0),
         slug='eintrag-1'
     ))
+    entries.append(factory.create(
+        pk=3,
+        author=author,
+        title=u'Entry chinese simplified',
+        published_on=datetime.datetime(2011,11,11, 11,0,0),
+        last_changed=datetime.datetime(2011,11,11, 15,0,0),
+        slug='entry-zhcn'
+    ))
+    entries.append(factory.create(
+        pk=4,
+        author=author,
+        title=u'Entry chinese tratitional',
+        published_on=datetime.datetime(2012,12,12, 11,0,0),
+        last_changed=datetime.datetime(2012,12,12, 15,0,0),
+        slug='entry-zhtw'
+    ))
     return entries
 
 
