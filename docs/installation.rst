@@ -98,25 +98,12 @@ Use Django's ``ABSOLUTE_URL_OVERRIDES`` mechanism to override the
 ``get_absolute_url`` method of blog entries and categories. Add the
 following methods and settings to your ``settings.py`` file::
 
-    def elephantblog_entry_url_app(self):
-        from feincms.content.application.models import app_reverse
-        return app_reverse('elephantblog_entry_detail', 'elephantblog.urls', kwargs={
-            'year': self.published_on.strftime('%Y'),
-            'month': self.published_on.strftime('%m'),
-            'day': self.published_on.strftime('%d'),
-            'slug': self.slug,
-            })
+    import elephantblog
 
-    def elephantblog_categorytranslation_url_app(self):
-        from feincms.content.application.models import app_reverse
-        return app_reverse('elephantblog_category_detail', 'elephantblog.urls', kwargs={
-            'slug': self.slug,
-            })
+    ABSOLUTE_URL_OVERRIDES = elephantblog.URL_OVERRIDES
 
-    ABSOLUTE_URL_OVERRIDES = {
-        'elephantblog.entry': elephantblog_entry_url_app,
-        'elephantblog.categorytranslation': elephantblog_categorytranslation_url_app,
-    }
+Feel free to customize the ``elephantblog.entry`` or
+``elephantblog.categorytranslation`` URLs yourself by providing your own function.
 
 
 Elephantblog also provides a navigation extension for FeinCMS.

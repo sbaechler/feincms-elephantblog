@@ -6,7 +6,6 @@ from django.test.testcases import TestCase
 from django.utils import translation
 
 from elephantblog.models import Entry
-#from feincms.module.extensions import translations
 from django.test import Client
 from .factories import EntryFactory, create_entries, create_chinese_entries
 from feincms.translations import short_language_code

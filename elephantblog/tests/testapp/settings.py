@@ -1,4 +1,6 @@
 import sys
+import elephantblog
+
 # -*- coding:utf-8 -*-
 INSTALLED_APPS = (
     'django.contrib.auth',
