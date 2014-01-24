@@ -14,8 +14,8 @@ from django.views.generic import dates
 
 from feincms.module.mixins import ContentObjectMixin
 
-from elephantblog.models import Category, Entry
-from elephantblog.utils import entry_list_lookup_related
+from .models import Category, Entry
+from .utils import entry_list_lookup_related
 
 
 __all__ = (
@@ -120,6 +120,12 @@ class DateDetailView(
     month_format = '%m'
     date_field = 'published_on'
     context_object_name = 'entry'
+    template_name_field = 'template_name'
+
+
+    def get_template_names(self):
+        return super(dates.DateDetailView, self).get_template_names()
+
 
     def get_queryset(self):
         if (self.request.user.is_authenticated() and self.request.user.is_staff
