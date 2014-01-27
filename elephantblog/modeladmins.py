@@ -55,12 +55,11 @@ class EntryAdmin(item_editor.ItemEditor):
             ]
         }],
         [_('Other options'), {
-            'fields': ['template_key'],
+            'fields': [],
             'classes': ('collapse',),
         }],
         item_editor.FEINCMS_CONTENT_FIELDSET,
     ]
-    radio_fields = {'template_key': admin.HORIZONTAL}
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'author':
